@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<head>
+    <!-- This exposes the library as a global variable: ethers -->
+    <script src="https://cdn.ethers.io/scripts/ethers-v4.min.js" charset="utf-8" type="text/javascript">
+    </script>
+    <style>
+        body {
+            font-size: 14px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        div {
+            padding: 20px;
+            width: 80%;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+
+
+        }
+
+        input,
+        textarea,
+        select,
+        button {
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid gray;
+            padding: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h2>Keystore Decrypt</h2>
+    </div>
+    <div><input type="password" id="password" placeholder="password"></div>
+    <div><textarea rows="10" id="keystore" placeholder="Key Store"></textarea></div>
+    <div>
+        <button type="button" title="Deploy" id="deployButton">Decrypt</button>
+    </div>
+    <div><textarea rows="4" id="logs" placeholder="Logs Info"></textarea></div>
+</body>
+<script>
+
+    function decrypt() {
+        var password = document.querySelector(" #password").value;
+        var keystore = document.querySelector("#keystore").value;
+        var logs = document.querySelector("#logs");
+
+        ethers.Wallet.fromEncryptedJson(keystore, password).then(function (wallet) {
+            console.log("Address: " + wallet.address);
+            // "Address: 0x88a5C2d9919e46F883EB62F7b8Dd9d0CC45bc290"
+            logs.value = wallet.privateKey
+        }).catch(e => console.log(e));
+
+
+    }
+
+    var deployButton = document.querySelector("#deployButton");
+    deployButton.addEventListener("click", e => {
+        decrypt();
+    });
+
+</script>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<head>
+    <!-- This exposes the library as a global variable: ethers -->
+    <script src="https://cdn.ethers.io/scripts/ethers-v4.min.js" charset="utf-8" type="text/javascript">
+    </script>
+    <style>
+        body {
+            font-size: 14px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        div {
+            padding: 20px;
+            width: 80%;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+
+
+        }
+
+        input,
+        textarea,
+        select,
+        button {
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid gray;
+            padding: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h2>Ethereum Token Transfer</h2>
+    </div>
+    <div>
+        <label for="provider">Choose a provider:</label>
+        <select id="provider">
+            <option value="ropsten">ropsten</option>
+            <option value="homestead">homestead-mainnet</option>
+            <option value="rinkeby">rinkeby</option>
+            <option value="audi">Audi</option>
+        </select>
+    </div>
+    <div><input type="password" id="privateKey" placeholder="private key"></div>
+    <div><input type="text" id="contractAddress" placeholder="Contract Address"></div>
+    <div><textarea rows="10" id="abi" placeholder="ABI Interface"></textarea></div>
+    <div><input type="text" id="toAddress" placeholder="To address"></div>
+    <div><input type="text" id="tokens" placeholder="Tokens"></div>
+    <div>
+        <button type="button" title="Deploy" id="sendTransaction">Send Tokens</button>
+    </div>
+    <div><textarea rows="4" id="logs" placeholder="Logs Info"></textarea></div>
+</body>
+<script>
+
+    function transferTokens() {
+        var privateKey = document.querySelector("#privateKey").value;
+        var contractAddress = document.querySelector("#contractAddress").value;
+        var selectedProvider = document.querySelector("#provider").value;
+        var abi = document.querySelector("#abi").value;
+        var toAddress = document.querySelector("#toAddress").value;
+        var tokens = document.querySelector("#tokens").value;
+
+        var logs = document.querySelector("#logs");
+
+        let provider = ethers.getDefaultProvider(selectedProvider);
+        window.mywallet = new ethers.Wallet(privateKey, provider);
+
+        let contract = new ethers.Contract(contractAddress, abi, provider);
+
+        // var wallet = new ethers.Wallet(privateKey, provider);
+        var signer = contract.connect(window.mywallet);
+
+        signer.transfer(toAddress, tokens)
+            .then(r => {
+                console.log(r);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+
+    }
+
+    var deployButton = document.querySelector("#sendTransaction");
+    deployButton.addEventListener("click", e => {
+        transferTokens();
+    });
+
+</script>
+
+</html>
