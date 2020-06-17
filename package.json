@@ -10,6 +10,17 @@
   "author": "Prashanth Babu T",
   "license": "ISC",
   "dependencies": {
-    "lite-server": "^2.5.4"
+    "chalk": "^4.1.0",
+    "figlet": "^1.4.0",
+    "inquirer": "^7.1.0",
+    "lite-server": "^2.5.4",
+    "mongodb": "^3.5.9",
+    "mongoose": "^5.9.18",
+    "shelljs": "^0.8.4"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.blockcerts.net/blockcers-group/blockcert_smartlauncher.git"
   }
 }
