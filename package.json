@@ -1,26 +1,28 @@
 {
-  "name": "blockcert_smartlauncherclear",
+  "name": "SmartLauncher",
   "version": "1.0.0",
-  "description": "utilities",
+  "description": "A tool to ease deployment of Smart Contracts to different Blockchain Networks",
   "main": "index.js",
   "scripts": {
-    "start": "lite-server",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Prashanth Babu T",
+  "keywords": [
+    "Blockcerts",
+    "Ethereum",
+    "SmartContracts"
+  ],
+  "author": "J. Sanchez",
   "license": "ISC",
   "dependencies": {
-    "chalk": "^4.1.0",
-    "figlet": "^1.4.0",
-    "inquirer": "^7.1.0",
-    "lite-server": "^2.5.4",
-    "mongodb": "^3.5.9",
-    "mongoose": "^5.9.18",
-    "shelljs": "^0.8.4"
+    "dotenv": "^8.2.0"
   },
-  "devDependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "https://gitlab.blockcerts.net/blockcers-group/blockcert_smartlauncher.git"
+  "devDependencies": {
+    "body-parser": "^1.19.0",
+    "connect-redis": "^5.0.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "ioredis": "^4.17.3",
+    "promise": "^8.1.0"
   }
 }
